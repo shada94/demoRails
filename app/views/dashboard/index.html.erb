@@ -1,6 +1,15 @@
+
 <header>
-welcome <%= current_user.email%>
+<h1>
+welcome <%= current_user.email %>
+</h1>
+<h2>
+we're using Rails <%= Rails.version %>
+</h2>
 </header>
 <section>
-Future home of izejoziejfoizejo 
+<p>
+Future home  
+</p>
+<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
 </section>

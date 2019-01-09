@@ -10,8 +10,12 @@ end
 gem 'devise' 
 #bower 
 gem 'bower-rails'
- 
-
+#sprockets-rails 
+gem 'sprockets-rails', '>= 2.3.2'
+#bootstrap 
+gem 'bootstrap', '~> 4.0.0'
+#jquery-rails
+gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
 # Use sqlite3 as the database for Active Record
