@@ -1,0 +1,63 @@
+I"ç(function() {
+  angular.module('myApp').controller('HomeCtrl', function($scope, Auth, $location, $http, userService, $window) {
+    $scope.user = JSON.parse($window.localStorage.getItem("currentUser"));
+    if ($scope.user != null) {
+      if ($scope.user !== "") {
+        $location.path('/login');
+      }
+      userService.getUserHolidays($scope.user.id).then(function(res) {
+        return $scope.holidays = res;
+      })["catch"](function(e) {
+        return console.log('access denied for user', e);
+      });
+    } else {
+      $location.path('/login');
+    }
+    $scope.sendDemande = function() {
+      var date1, date2;
+      date1 = moment($scope.dateStart);
+      date2 = moment($scope.dateEnd);
+      return userService.sendDemande($scope.user.id, date1.format(), date2.format(), $scope.reason).then(function(res) {
+        console.log(res);
+        $scope.dateStart = '';
+        $scope.dateEnd = '';
+        $scope.reason = '';
+        $scope.showMsgValid = true;
+        return userService.getUserHolidays($scope.user.id).then(function(res) {
+          return $scope.holidays = res;
+        });
+      })["catch"](function(e) {
+        return console.log('reject holiday for user', e);
+      }, function(error) {
+        console.log('error send request', error);
+        return $scope.showMsgError = true;
+      });
+    };
+    $scope.getModel = function(id) {
+      return userService.getModel(id).then(function(res) {
+        console.log(res);
+        return $scope.myModel = res;
+      }, function(error) {
+        return console.log('error get model', error);
+      });
+    };
+    return $scope.acceptRequest = function(event, id, user_id, db, df, solde) {
+      event.preventDefault();
+      return userService.sendAccept(id, user_id, db, df, solde).then(function(res) {
+        return userService.getAllUsers().then(function(res) {
+          return $scope.users = res.data;
+        }, function(error) {
+          return console.log('error users not found !', error);
+        });
+      }, function(error) {
+        console.log(error, 'Error reject demand');
+        return $scope.showMsgError = true;
+      }, function(error) {
+        console.log(error, 'Error reject demand');
+        return $scope.showMsgError = true;
+      });
+    };
+  });
+
+}).call(this);
+:ET

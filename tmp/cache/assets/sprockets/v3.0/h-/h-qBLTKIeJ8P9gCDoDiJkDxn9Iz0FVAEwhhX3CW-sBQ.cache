@@ -1,0 +1,86 @@
+I"Y
+(function() {
+  angular.module('myApp').service('userService', function($http, $q, $window) {
+    this.getUserHolidays = function(id) {
+      var deffered;
+      deffered = $q.defer();
+      $http.get('/holiday/getUserHolidays/' + id).then(function(holidays) {
+        var res;
+        res = holidays.data.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'Holidays User not found');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    this.sendDemande = function(id, d1, d2, reason) {
+      var Indata, deffered, headers;
+      deffered = $q.defer();
+      Indata = {
+        'user_id': id,
+        'dateStart': d2,
+        'dateEnd': d1,
+        'reason': reason
+      };
+      console.log(Indata);
+      headers = {
+        'Content-Type': 'application/json'
+      };
+      $http.post('/holiday/saveHoliday', Indata, headers).then(function(response) {
+        var res;
+        res = response.data.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'can not save demand !.');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    this.getModel = function(id) {
+      var deffered;
+      deffered = $q.defer();
+      $http.get('/holiday/getUserHolidayModel/' + id).then(function(model) {
+        var res;
+        res = model.data.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'model User not found');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    this.sendAccept = function(id, user_id, db, df, solde) {
+      var Indata, _MS_PER_DAY, a, b, deffered, headers, res, resF, utc1, utc2;
+      deffered = $q.defer();
+      _MS_PER_DAY = 1000 * 60 * 60 * 24;
+      a = moment(db);
+      b = moment(df);
+      utc1 = Date.UTC(a.year(), a.month(), a.date());
+      utc2 = Date.UTC(b.year(), b.month(), b.date());
+      res = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+      resF = solde - res;
+      Indata = {
+        id: id,
+        etat: 'Accepté',
+        user_id: user_id,
+        solde: resF
+      };
+      headers = {
+        'Content-Type': 'application/json'
+      };
+      $http.post('/conge/AcceptHoliday/', Indata, headers).then(function(response) {
+        angular.element('#exampleModal').modal('hide');
+        res = response.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'Error reject demand');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    return this;
+  });
+
+}).call(this);
+:ET

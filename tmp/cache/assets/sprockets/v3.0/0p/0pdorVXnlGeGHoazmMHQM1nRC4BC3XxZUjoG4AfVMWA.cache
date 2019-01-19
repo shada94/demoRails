@@ -1,0 +1,17 @@
+{:uriI"‚file://app/assets/javascripts/views/nav.html?type=text/ng-html&id=d44edf60d74b3a81ce6665f8f5a06c18be236579438ef40392525e734fa3679b:ET:load_pathI"app/assets/javascripts;T:filenameI"*app/assets/javascripts/views/nav.html;T:	nameI"views/nav;T:logical_pathI"views/nav.html;T:content_typeI"text/ng-html;T:sourceI"º  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav" >
+        <!-- <li><a ui-sref="home">Home</a></li> -->
+        <li ng-hide="signedIn()"><a ui-sref="login">Login</a></li>
+        <li ng-hide="signedIn()"><a ui-sref="register">Register</a></li>
+        <li ng-show="signedIn()"><a ng-click="logout()">Log Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"8processors:type=text/ng-html&file_type=text/ng-html;TTI"8file-digest://app/assets/javascripts/views/nav.html;TTF:charsetI"
+utf-8;F:digest"%$E<OÚÉ¢&V—L7á5X9i+êÌÍÍÌú7˜»DÇñ[:lengthiº:dependencies_digest"%H,=híMêQ˜Ë›ž€·P,Ìh|R8¶ø:."*:idI"Ed44edf60d74b3a81ce6665f8f5a06c18be236579438ef40392525e734fa3679b;F:
+mtimel+·_@\

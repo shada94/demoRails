@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dateStart: 2019-01-16
+  dateEnd: 2019-01-16
+  reason: MyString
+  state: MyString
+
+two:
+  dateStart: 2019-01-16
+  dateEnd: 2019-01-16
+  reason: MyString
+  state: MyString

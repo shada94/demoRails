@@ -1,0 +1,59 @@
+I"á(function() {
+  angular.module('myApp').service('userService', function($http, $q) {
+    this.getUserHolidays = function(id) {
+      var deffered;
+      deffered = $q.defer();
+      $http.get('/holiday/getUserHolidays/' + id).then(function(holidays) {
+        var res;
+        res = holidays.data.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'Holidays User not found');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    this.me = function() {
+      return $http.get('/GetLoggedUserInfo').then(function(res) {
+        var isLogedIn, user;
+        console.log('res =', res);
+        user = res;
+        if (res.data.data != null) {
+          $location.path('/home');
+          $window.localStorage.setItem("currentUser", angular.toJson(res.data.data));
+        }
+        if (res.data.data == null) {
+          return isLogedIn = true;
+        }
+      }, function(error) {
+        return console.log(error, ' User is not logged in');
+      });
+    };
+    this.sendDemande = function(id, d1, d2, reason) {
+      var Indata, deffered, headers;
+      deffered = $q.defer();
+      Indata = {
+        'user_id': id,
+        'dateStart': d2,
+        'dateEnd': d1,
+        'reason': reason
+      };
+      console.log(Indata);
+      headers = {
+        'Content-Type': 'application/json'
+      };
+      $http.post('/holiday/saveHoliday', Indata, headers).then(function(response) {
+        var res;
+        res = response.data.data;
+        return deffered.resolve(res);
+      }, function(error) {
+        console.log(error, 'can not save demand !.');
+        return deffered.reject(error);
+      });
+      return deffered.promise;
+    };
+    return this;
+  });
+
+}).call(this);
+:ET

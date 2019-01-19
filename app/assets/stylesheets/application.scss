@@ -1,0 +1,48 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "font-awesome";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+body {
+      font-size: 13px;
+      color: #636E7B;
+      background-color: #fff;
+}
+.panel-title {
+    font-size: 24px;
+    font-family: serif;
+  }
+  #userTable thead {
+    background-color: #428BCA;
+    color: white;
+  }
+  #adminTable thead {
+    background-color: #428BCA;
+    color: white;
+  }
+  .btn-holiday {
+    background-color: #88accc;
+    font-size: 15px;
+    line-height: 12px;
+    border-radius: 6px;
+    border-color: #88accc;
+  }
+  .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle,.btn-info:hover, .btn-info:focus {
+    color: #fff !important;
+    background-color: #88accc !important;
+    border-color: #88accc !important;
+}
